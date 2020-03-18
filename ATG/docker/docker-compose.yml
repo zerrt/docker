@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  
+  atg:
+    image: josedeng/atg:atg-${ATG_VERSION}
+    volumes:
+      - ${ATG_HOME}:/opt/atg
+
+  was:
+    build: ./services/was/.
+    environment:
+      UPDATE_HOSTNAME: "true"
+    hostname: was
+    networks:
+      atg-net:
+        aliases:
+          - was
+    ports:
+       - "9080:9080"
+       - "9043:9043"
+       - "9443:9443"
+       - "2809:2809"
+       - "8880:8880"
+       - "9633:9633"
+       - "7777:7777"
+    volumes:
+      - ${WAS_HOME}/logs:/logs
+      - ~/.jrebel:/home/was/.jrebel
+      
+  ihs:
+    build: ibmcom/ibm-http-server
+    hostname: ihs
+    ports:
+      - 80:80
+      - 443:443
+      - 8008:8008
+    networks:
+      atg-net:
+        aliases:
+          - ihs
+              
+networks:
+  atg-net:   
