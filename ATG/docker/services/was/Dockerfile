@@ -12,7 +12,7 @@ RUN unzip jrebel-stable-nosetup.zip
 #COPY --chown=gradle:gradle . /home/gradle/src
 #RUN chmod -R 777 /home/gradle/src
 #WORKDIR /home/gradle/src
-#RUN ./gradlew --no-daemon war
+#RUN ./gradlew --no-daemon war 
 #RUN cp  web/build/libs/web.war /tmp/app
 
 
