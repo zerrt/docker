@@ -12,10 +12,6 @@ services:
     environment:
       UPDATE_HOSTNAME: "true"
     hostname: was
-    networks:
-      atg-net:
-        aliases:
-          - was
     ports:
        - "9080:9080"
        - "9043:9043"
@@ -34,11 +30,4 @@ services:
     ports:
       - 80:80
       - 443:443
-      - 8008:8008
-    networks:
-      atg-net:
-        aliases:
-          - ihs
-              
-networks:
-  atg-net:   
+      - 8008:8008 
